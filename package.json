@@ -1,0 +1,24 @@
+{
+  "name": "bloons-upgrade-manager",
+  "version": "1.0.0",
+  "description": "A web-based upgrade cost calculator for Bloons Tower Defense games with Discord Bot integration",
+  "main": "src/discord-bot.js",
+  "scripts": {
+    "bot": "node src/discord-bot.js"
+  },
+  "keywords": [
+    "bloons",
+    "tower-defense",
+    "calculator",
+    "discord-bot"
+  ],
+  "author": "user043-tech",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.14.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

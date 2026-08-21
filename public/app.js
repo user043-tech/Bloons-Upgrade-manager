@@ -1,7 +1,9 @@
 let towers = [];
 
 // Load towers on page load
-document.addEventListener('DOMContentLoaded', loadTowers);
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadTowers();
+});
 
 // Event listeners
 document.getElementById('calculate-btn').addEventListener('click', calculateCosts);
@@ -9,11 +11,13 @@ document.getElementById('reset-btn').addEventListener('click', resetCalculator);
 
 async function loadTowers() {
   try {
-    const response = await fetch('/api/towers');
+    // Load towers from local JSON file
+    const response = await fetch('./data/towers.json');
     towers = await response.json();
     renderTowers();
   } catch (error) {
     console.error('Error loading towers:', error);
+    alert('Error loading tower data. Make sure towers.json exists in the data folder.');
   }
 }
 
@@ -91,7 +95,7 @@ function createTowerElement(tower) {
   return div;
 }
 
-async function calculateCosts() {
+function calculateCosts() {
   const selectedTowers = getSelectedTowers();
 
   if (selectedTowers.length === 0) {
@@ -99,21 +103,8 @@ async function calculateCosts() {
     return;
   }
 
-  try {
-    const response = await fetch('/api/calculate', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ towers: selectedTowers })
-    });
-
-    const result = await response.json();
-    displayResults(result);
-  } catch (error) {
-    console.error('Error calculating costs:', error);
-    alert('Error calculating costs. Please try again.');
-  }
+  const result = calculateLocally(selectedTowers);
+  displayResults(result);
 }
 
 function getSelectedTowers() {
@@ -148,6 +139,65 @@ function getSelectedTowers() {
   });
 
   return selected;
+}
+
+function calculateLocally(selectedTowers) {
+  let totalCost = 0;
+  const breakdown = [];
+
+  selectedTowers.forEach(towerRequest => {
+    const tower = towers.find(t => t.id === towerRequest.towerId);
+    if (!tower) {
+      return;
+    }
+
+    let towerTotalCost = tower.baseCost;
+    const upgrades = [];
+
+    // Calculate upgrade costs
+    if (towerRequest.topUpgrades) {
+      towerRequest.topUpgrades.forEach(tier => {
+        const upgrade = tower.upgrades.top.find(u => u.tier === tier);
+        if (upgrade) {
+          towerTotalCost += upgrade.cost;
+          upgrades.push({ path: 'Top', name: upgrade.name, cost: upgrade.cost });
+        }
+      });
+    }
+
+    if (towerRequest.middleUpgrades) {
+      towerRequest.middleUpgrades.forEach(tier => {
+        const upgrade = tower.upgrades.middle.find(u => u.tier === tier);
+        if (upgrade) {
+          towerTotalCost += upgrade.cost;
+          upgrades.push({ path: 'Middle', name: upgrade.name, cost: upgrade.cost });
+        }
+      });
+    }
+
+    if (towerRequest.bottomUpgrades) {
+      towerRequest.bottomUpgrades.forEach(tier => {
+        const upgrade = tower.upgrades.bottom.find(u => u.tier === tier);
+        if (upgrade) {
+          towerTotalCost += upgrade.cost;
+          upgrades.push({ path: 'Bottom', name: upgrade.name, cost: upgrade.cost });
+        }
+      });
+    }
+
+    totalCost += towerTotalCost;
+    breakdown.push({
+      tower: tower.name,
+      baseCost: tower.baseCost,
+      upgrades: upgrades,
+      subtotal: towerTotalCost
+    });
+  });
+
+  return {
+    breakdown: breakdown,
+    totalCost: totalCost
+  };
 }
 
 function displayResults(result) {

@@ -1,18 +1,19 @@
-# 🎈 Bloons Tower Defense Upgrade Calculator
+# 🎈 Bloons Upgrade Manager
 
 A web-based upgrade cost calculator for Bloons Tower Defense games with Discord Bot integration.
 
 ## 🚀 Features
 
-- **Web Interface**: Interactive calculator to select towers and upgrades
+- **Web Interface**: Interactive calculator to select towers and upgrades (runs locally)
 - **Cost Breakdown**: Detailed breakdown of tower base costs and upgrade expenses
 - **Total Cost Calculation**: Automatically calculate total cost for selected upgrades
-- **Discord Bot Integration**: Use `/calculate` and `/towers` commands in Discord
+- **Discord Bot Integration**: Use `/towers` and `/calculate` commands in Discord
+- **No Backend Required**: Fully static website - works on GitHub Pages or locally
 - **Expandable Design**: Easily add more towers and games from the Bloons series
 
 ## 📋 Prerequisites
 
-- Node.js (v14 or higher)
+- Node.js (v14 or higher) - only for Discord Bot
 - npm or yarn
 - Discord Bot Token (for Discord bot functionality)
 
@@ -20,11 +21,11 @@ A web-based upgrade cost calculator for Bloons Tower Defense games with Discord 
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/user043-tech/bloons-tower-defense-upgrade-calculator.git
-   cd bloons-tower-defense-upgrade-calculator
+   git clone https://github.com/user043-tech/bloons-upgrade-manager.git
+   cd bloons-upgrade-manager
    ```
 
-2. **Install dependencies**
+2. **For Discord Bot only - Install dependencies**
    ```bash
    npm install
    ```
@@ -34,7 +35,7 @@ A web-based upgrade cost calculator for Bloons Tower Defense games with Discord 
    cp .env.example .env
    ```
 
-4. **Add your Discord Bot Token** (optional, only if using Discord bot)
+4. **Add your Discord Bot Token**
    - Go to [Discord Developer Portal](https://discord.com/developers/applications)
    - Create a new Application
    - Go to "Bot" section and click "Add Bot"
@@ -48,31 +49,29 @@ A web-based upgrade cost calculator for Bloons Tower Defense games with Discord 
 
 ## 🏃 Running the Application
 
-### Web Server Only
-```bash
-npm start
-```
-The web interface will be available at `http://localhost:3000`
+### Web Interface (Static - No Server Needed)
 
-### Discord Bot Only
-```bash
-npm run bot
-```
+**Option 1: Open locally**
+- Open `public/index.html` in your browser
+- Or use a simple HTTP server:
+  ```bash
+  # Python 3
+  python -m http.server 8000
+  # Then open http://localhost:8000/public/
+  ```
 
-### Both (in separate terminals)
-Terminal 1:
-```bash
-npm start
-```
+**Option 2: View on GitHub Pages**
+- Visit: https://user043-tech.github.io/bloons-upgrade-manager
 
-Terminal 2:
+### Discord Bot (Runs on Your PC)
 ```bash
-npm run bot
+npm install
+node src/discord-bot.js
 ```
 
 ## 💻 Web Interface Usage
 
-1. Open `http://localhost:3000` in your browser
+1. Open the interface (locally or via GitHub Pages)
 2. Select towers by checking their boxes
 3. Choose upgrades for each tower (Top, Middle, Bottom paths)
 4. Click "Calculate Total Cost" to see the breakdown
@@ -96,79 +95,26 @@ npm run bot
 ## 📁 Project Structure
 
 ```
-bloons-tower-defense-upgrade-calculator/
-├── data/
-│   └── towers.json           # Tower data and upgrade information
+bloons-upgrade-manager/
+├── public/                   # Static website
+│   ├── index.html           # Web interface HTML
+│   ├── styles.css           # Web interface styling
+│   ├── app.js               # Web interface JavaScript
+│   └── data/
+│       └── towers.json      # Tower data
 ├── src/
-│   ├── server.js             # Express server and API routes
-│   └── discord-bot.js        # Discord bot implementation
-├── public/
-│   ├── index.html            # Web interface HTML
-│   ├── styles.css            # Web interface styling
-│   └── app.js                # Web interface JavaScript
-├── .env.example              # Environment variables template
-├── .gitignore                # Git ignore rules
-├── package.json              # Project dependencies
-└── README.md                 # This file
-```
-
-## 📝 API Endpoints
-
-### GET `/api/towers`
-Get all available towers
-
-**Response:**
-```json
-[
-  {
-    "id": "dart-monkey",
-    "name": "Dart Monkey",
-    "baseCost": 1200,
-    "upgrades": { ... }
-  }
-]
-```
-
-### GET `/api/towers/:towerId`
-Get specific tower details
-
-### POST `/api/calculate`
-Calculate total upgrade costs
-
-**Request:**
-```json
-{
-  "towers": [
-    {
-      "towerId": "dart-monkey",
-      "topUpgrades": [1, 2, 3],
-      "middleUpgrades": [],
-      "bottomUpgrades": [1]
-    }
-  ]
-}
-```
-
-**Response:**
-```json
-{
-  "breakdown": [
-    {
-      "tower": "Dart Monkey",
-      "baseCost": 1200,
-      "upgrades": [...],
-      "subtotal": 3200
-    }
-  ],
-  "totalCost": 3200
-}
+│   ���── discord-bot.js       # Discord bot (local only)
+├── .env.example             # Environment variables template
+├── .gitignore               # Git ignore rules
+├── package.json             # Project dependencies
+└── README.md                # This file
 ```
 
 ## 🔄 Adding More Towers
 
 To add more towers from BTD6 or other Bloons games:
 
-1. Edit `data/towers.json`
+1. Edit `public/data/towers.json`
 2. Add a new tower object with:
    - `id`: Unique identifier (e.g., "glue-gunner")
    - `name`: Display name
