@@ -1,24 +1,106 @@
+// Tower data embedded directly
+const towersData = [
+  {
+    "id": "dart-monkey",
+    "name": "Dart Monkey",
+    "baseCost": 1200,
+    "upgrades": {
+      "top": [
+        { "tier": 1, "cost": 400, "name": "Sharp Shots" },
+        { "tier": 2, "cost": 600, "name": "Razor Sharp Shots" },
+        { "tier": 3, "cost": 1200, "name": "Dart Paragon" },
+        { "tier": 4, "cost": 2400, "name": "Razor Blade Paragon" },
+        { "tier": 5, "cost": 6000, "name": "Apex Paragon" }
+      ],
+      "middle": [
+        { "tier": 1, "cost": 350, "name": "Sharper Shots" },
+        { "tier": 2, "cost": 500, "name": "Dart Trap" },
+        { "tier": 3, "cost": 1000, "name": "Dart Funnel" },
+        { "tier": 4, "cost": 2000, "name": "Super Funnel" },
+        { "tier": 5, "cost": 4500, "name": "Mega Funnel" }
+      ],
+      "bottom": [
+        { "tier": 1, "cost": 300, "name": "Long Range Darts" },
+        { "tier": 2, "cost": 450, "name": "Sharp Shots" },
+        { "tier": 3, "cost": 800, "name": "Powerful Shots" },
+        { "tier": 4, "cost": 1500, "name": "Heavy Caliber" },
+        { "tier": 5, "cost": 3500, "name": "Assault Rifle" }
+      ]
+    }
+  },
+  {
+    "id": "bomb-shooter",
+    "name": "Bomb Shooter",
+    "baseCost": 1600,
+    "upgrades": {
+      "top": [
+        { "tier": 1, "cost": 500, "name": "Big Bombs" },
+        { "tier": 2, "cost": 800, "name": "Bigger Bombs" },
+        { "tier": 3, "cost": 1500, "name": "Largest Bombs" },
+        { "tier": 4, "cost": 3000, "name": "Bomb Paragon" },
+        { "tier": 5, "cost": 7000, "name": "Mega Bomb Paragon" }
+      ],
+      "middle": [
+        { "tier": 1, "cost": 400, "name": "Bigger Blast Radius" },
+        { "tier": 2, "cost": 600, "name": "Even Bigger Blasts" },
+        { "tier": 3, "cost": 1200, "name": "Satellite Support" },
+        { "tier": 4, "cost": 2500, "name": "Orbital Bombardment" },
+        { "tier": 5, "cost": 5000, "name": "Carpet of Spikes" }
+      ],
+      "bottom": [
+        { "tier": 1, "cost": 350, "name": "Missile Launcher" },
+        { "tier": 2, "cost": 550, "name": "Missile Launcher++" },
+        { "tier": 3, "cost": 1000, "name": "Guided Missiles" },
+        { "tier": 4, "cost": 2000, "name": "Advanced Targeting" },
+        { "tier": 5, "cost": 4500, "name": "AI Launcher" }
+      ]
+    }
+  },
+  {
+    "id": "ice-monkey",
+    "name": "Ice Monkey",
+    "baseCost": 1200,
+    "upgrades": {
+      "top": [
+        { "tier": 1, "cost": 450, "name": "Longer Freeze Time" },
+        { "tier": 2, "cost": 700, "name": "Permanent Freeze" },
+        { "tier": 3, "cost": 1400, "name": "Arctic Wind" },
+        { "tier": 4, "cost": 2800, "name": "Absolute Zero" },
+        { "tier": 5, "cost": 6500, "name": "Ice Paragon" }
+      ],
+      "middle": [
+        { "tier": 1, "cost": 400, "name": "Larger Radius" },
+        { "tier": 2, "cost": 600, "name": "Thaw Imbalance" },
+        { "tier": 3, "cost": 1200, "name": "Icy Sips" },
+        { "tier": 4, "cost": 2400, "name": "Snowstorm" },
+        { "tier": 5, "cost": 5000, "name": "Blizzard" }
+      ],
+      "bottom": [
+        { "tier": 1, "cost": 350, "name": "Snap Freeze" },
+        { "tier": 2, "cost": 550, "name": "Deeper Freeze" },
+        { "tier": 3, "cost": 1000, "name": "Shatter" },
+        { "tier": 4, "cost": 2000, "name": "Freezing Aura" },
+        { "tier": 5, "cost": 4000, "name": "Perma Freeze" }
+      ]
+    }
+  }
+];
+
 let towers = [];
 
 // Load towers on page load
 document.addEventListener('DOMContentLoaded', async () => {
-  await loadTowers();
+  loadTowers();
 });
 
 // Event listeners
 document.getElementById('calculate-btn').addEventListener('click', calculateCosts);
 document.getElementById('reset-btn').addEventListener('click', resetCalculator);
 
-async function loadTowers() {
-  try {
-    // Load towers from local JSON file
-    const response = await fetch('./data/towers.json');
-    towers = await response.json();
-    renderTowers();
-  } catch (error) {
-    console.error('Error loading towers:', error);
-    alert('Error loading tower data. Make sure towers.json exists in the data folder.');
-  }
+function loadTowers() {
+  // Use embedded tower data
+  towers = towersData;
+  renderTowers();
 }
 
 function renderTowers() {
