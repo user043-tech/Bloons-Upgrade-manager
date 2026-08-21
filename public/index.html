@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bloons Tower Defense - Upgrade Calculator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎈 Bloons Tower Defense Upgrade Calculator</h1>
+      <p>Calculate the total cost of your tower upgrades</p>
+    </header>
+
+    <main>
+      <section class="calculator">
+        <h2>Select Towers and Upgrades</h2>
+        <div id="towers-container"></div>
+        
+        <button id="calculate-btn" class="btn btn-primary">Calculate Total Cost</button>
+      </section>
+
+      <section class="results" id="results-section" style="display: none;">
+        <h2>Cost Breakdown</h2>
+        <div id="breakdown-container"></div>
+        <div class="total-cost">
+          <h3>Total Cost: <span id="total-cost">0</span> 💰</h3>
+        </div>
+        <button id="reset-btn" class="btn btn-secondary">Reset</button>
+      </section>
+    </main>
+
+    <footer>
+      <p>Bloons Tower Defense Upgrade Calculator | Made with ❤️ for BTD Players</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
