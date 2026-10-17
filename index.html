@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bloons Tower Defense Upgrade Calculator - Berechne die Gesamtkosten deiner Tower-Upgrades">
+  <meta name="theme-color" content="#667eea">
+  <title>🎈 Bloons Upgrade Calculator</title>
+  <link rel="stylesheet" href="styles_improved.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-content">
+        <h1>🎈 Bloons Upgrade Calculator</h1>
+        <p>Berechne die Gesamtkosten deiner Tower-Upgrades</p>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" title="Design wechseln">🌙</button>
+    </header>
+
+    <main>
+      <section class="calculator-section">
+        <div class="section-header">
+          <h2>Tower & Upgrades auswählen</h2>
+          <div class="quick-actions">
+            <button id="select-all-btn" class="btn-small">Alle auswählen</button>
+            <button id="deselect-all-btn" class="btn-small">Alle abwählen</button>
+          </div>
+        </div>
+
+        <div class="difficulty-select">
+          <label for="difficulty-select">Schwierigkeitsgrad:</label>
+          <select id="difficulty-select">
+            <option value="0">Easy</option>
+            <option value="1" selected>Medium</option>
+            <option value="2">Hard</option>
+            <option value="3">Impoppable</option>
+          </select>
+        </div>
+
+        <div class="search-box">
+          <input 
+            type="text" 
+            id="tower-search" 
+            placeholder="Tower suchen..." 
+            class="search-input"
+          >
+          <span class="search-icon">🔍</span>
+        </div>
+
+        <div id="towers-container" class="towers-container"></div>
+        
+        <div class="button-group">
+          <button id="calculate-btn" class="btn btn-primary">Kosten berechnen</button>
+        </div>
+      </section>
+
+      <section class="results-section" id="results-section" style="display: none;">
+        <h2>💰 Kostenaufschlüsselung</h2>
+        <div id="breakdown-container" class="breakdown-container"></div>
+        <div class="total-cost-box">
+          <h3>Gesamtkosten</h3>
+          <div class="total-amount">
+            <span id="total-cost">0</span>
+            <span class="currency">💰</span>
+          </div>
+        </div>
+        <div class="button-group">
+          <button id="export-btn" class="btn btn-secondary">Ergebnis kopieren</button>
+          <button id="reset-btn" class="btn btn-secondary">Zurücksetzen</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Made with ❤️ for BTD Players | v2.0.0</p>
+      <p><a href="https://github.com/user043-tech/Bloons-Upgrade-manager" target="_blank">GitHub Repo</a></p>
+    </footer>
+  </div>
+
+  <script src="app_improved.js"></script>
+</body>
+</html>
