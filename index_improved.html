@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bloons TD 6 Upgrade Calculator – Berechne die Gesamtkosten deiner Tower-Upgrades">
+  <meta name="theme-color" content="#667eea">
+  <title>🎈 Bloons Upgrade Calculator</title>
+  <link rel="stylesheet" href="styles_improved.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-content">
+        <h1>🎈 Bloons Upgrade Calculator</h1>
+        <p data-i18n="subtitle">Berechne die Gesamtkosten deiner Tower-Upgrades</p>
+      </div>
+      <div class="header-controls">
+        <select id="lang-select" class="lang-select" aria-label="Sprache / Language">
+          <option value="auto">🌐 Auto</option>
+          <option value="de">Deutsch</option>
+          <option value="en">English</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+          <option value="it">Italiano</option>
+          <option value="nl">Nederlands</option>
+          <option value="pl">Polski</option>
+        </select>
+        <button id="theme-toggle" class="theme-toggle" title="Design wechseln">🌙</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="calculator-section">
+        <div class="section-header">
+          <h2 data-i18n="selectTitle">Tower & Upgrades auswählen</h2>
+          <div class="quick-actions">
+            <button id="select-all-btn" class="btn-small" data-i18n="selectAll">Alle hinzufügen</button>
+            <button id="deselect-all-btn" class="btn-small" data-i18n="deselectAll">Setup leeren</button>
+          </div>
+        </div>
+
+        <div class="search-box">
+          <input type="text" id="tower-search" class="search-input" data-i18n-placeholder="searchPlaceholder" placeholder="Tower suchen...">
+          <span class="search-icon">🔍</span>
+        </div>
+
+        <div class="difficulty-select">
+          <label for="difficulty-select" data-i18n="difficultyLabel">Schwierigkeitsgrad:</label>
+          <select id="difficulty-select">
+            <option value="0">Easy</option>
+            <option value="1" selected>Medium</option>
+            <option value="2">Hard</option>
+            <option value="3">Impoppable</option>
+          </select>
+        </div>
+
+        <div id="towers-container" class="towers-container"></div>
+
+        <div class="button-group">
+          <button id="calculate-btn" class="btn btn-primary" data-i18n="calculate">Kosten berechnen</button>
+        </div>
+      </section>
+
+      <section class="results-section" id="results-section" style="display: none;">
+        <h2 data-i18n="resultsTitle">💰 Kostenaufschlüsselung</h2>
+        <div id="breakdown-container" class="breakdown-container"></div>
+        <div class="total-cost-box">
+          <h3 data-i18n="totalCost">Gesamtkosten</h3>
+          <div class="total-amount">
+            <span id="total-cost">0</span>
+            <span class="currency">💰</span>
+          </div>
+        </div>
+        <div class="button-group">
+          <button id="export-btn" class="btn btn-secondary" data-i18n="copyResult">Ergebnis kopieren</button>
+          <button id="reset-btn" class="btn btn-secondary" data-i18n="reset">Zurücksetzen</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Made with ❤️ for BTD Players | v2.0.0</p>
+      <p data-i18n-html="aiNotice" class="ai-notice">🤖 Dieses Projekt wurde mit Unterstützung von KI (Claude, Anthropic) erstellt. Die Kostenangaben stammen aus dem <a href="https://www.bloonswiki.com" target="_blank" rel="noopener">BTD6-Wiki</a> und wurden stichprobenartig geprüft. Ohne Gewähr, da Spielwerte sich mit Updates ändern.</p>
+      <p><a href="https://github.com/user043-tech/Bloons-Upgrade-manager" target="_blank" rel="noopener">GitHub Repo</a></p>
+    </footer>
+  </div>
+
+  <script src="app_improved.js"></script>
+</body>
+</html>
