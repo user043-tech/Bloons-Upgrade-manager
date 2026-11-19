@@ -1,6 +1,6 @@
 # 🎈 Bloons Upgrade Manager
 
-A web-based upgrade cost calculator for Bloons Tower Defense games with Discord Bot integration.
+A web-based upgrade cost calculator for Bloons Tower Defense games.
 
 ## 🚀 Features
 
